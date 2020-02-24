@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="{{ url_for('static', filename='index.js') }}"></script>
         <title>Flack</title>
     </head>
     <body>
-        <form action="" method="post">
+        <form id="new-display-name">
                 <input type="text" id="display-name" placeholder="Display Name">
                 <button type="submit">Submit</button>
         </form>
