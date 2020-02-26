@@ -1,7 +1,18 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
+
+        <script id="channel" type="text/x-handlebars-template">
+            <div class="channel">
+                {% raw -%}
+                    {{contents}}
+                {%- endraw %}
+            </div>
+        </script>
+
         <script src="{{ url_for('static', filename='index.js') }}"></script>
+        
         <title>Flack</title>
     </head>
     <body>
@@ -9,5 +20,8 @@
                 <input type="text" id="display-name" placeholder="Display Name">
                 <button type="submit">Submit</button>
         </form>
+
+        <div id="channels">
+        </div>
     </body>
 </html>
