@@ -23,8 +23,10 @@ def channels():
 @socketio.on("new_channel")
 def create_channel(data):
     channel_name = data['name']
-    channels_list.append(channel_name)
-    emit("update_channels", channel_name, broadcast=True)
+
+    if channel_name not in channels_list:
+        channels_list.append(channel_name)
+        emit("update_channels", channel_name, broadcast=True)
 
 
 if __name__ == '__main__':
