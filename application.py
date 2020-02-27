@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
 socketio = SocketIO(app)
 
-channels_list = ['channel one', 'channel two', 'channel three']
+channels_list = ['channel_one', 'channel_two', 'channel_three']
 
 @app.route("/")
 def index():

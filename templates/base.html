@@ -8,7 +8,7 @@
         <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
 
         <script id="channel" type="text/x-handlebars-template">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="channels/{% raw -%}{{contents}}{%- endraw %}">
                 {% raw -%}
                     {{contents}}
                 {%- endraw %}
@@ -30,7 +30,7 @@
             <div id="nav-channels" class="col-3 column">
                 <form id="new-channel-name">
                     <div class="form-inline">
-                        <input type="text" class="form-control mb-2" id="channel-name" placeholder="Create Channel">
+                        <input type="text" class="form-control mb-2" id="channel-name" pattern="[a-zA-Z0-9_]+" placeholder="Create Channel">
                         <button type="submit" class="btn btn-secondary mb-2">Create</button>
                     </div>
                 </form>
