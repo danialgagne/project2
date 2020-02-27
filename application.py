@@ -2,7 +2,7 @@ import os
 
 from dotenv import load_dotenv
 
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 from flask_socketio import SocketIO, emit
 
 load_dotenv()
@@ -19,3 +19,13 @@ def index():
 @app.route("/channels")
 def channels():
     return jsonify(channels_list)
+
+@socketio.on("new_channel")
+def create_channel(data):
+    channel_name = data['name']
+    channels_list.append(channel_name)
+    emit("update_channels", channel_name, broadcast=True)
+
+
+if __name__ == '__main__':
+    socketio.run(app)
