@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // show display name if set
     if (localStorage.getItem('display-name')) {
-        document.querySelector('#new-display-name').remove()
+        document.querySelector('#new-display-name').remove() 
         load_channels();
     }
     else {
