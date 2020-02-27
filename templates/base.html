@@ -2,15 +2,7 @@
 <html>
     <head>
         <title>Flack</title>
-        <style>
-            .centered-form {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                min-height: 100vh;
-            }
-        </style>
-
+        
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 
@@ -22,7 +14,8 @@
             </a>
         </script>
 
-        <script src="{{ url_for('static', filename='index.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     </head>
     <body>
         <form id="new-display-name">
@@ -33,17 +26,19 @@
         </form>
 
         <div class="row">
-            <div class="col-3">
+            <div id="nav-channels" class="col-3 column">
                 <form id="new-channel-name">
                     <div class="form-inline">
                         <input type="text" class="form-control mb-2" id="channel-name" placeholder="Create Channel">
                         <button type="submit" class="btn btn-secondary mb-2">Create</button>
                     </div>
                 </form>
-                <div id="channels">
-                </div>
+
+                <nav id="channels">
+                </nav>
             </div>
-            <div class="col-9">
+
+            <div class="col-9 column">
                 Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat.
             </div>
         </div>

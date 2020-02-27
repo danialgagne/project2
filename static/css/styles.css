@@ -1,0 +1,23 @@
+nav a {
+    color: white;
+}
+
+.centered-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.column {
+    padding: 20px;
+}
+
+.row {
+    min-height: 100vh;
+    width: 100%;
+}
+
+#nav-channels {
+    background-color: #563d7c;
+}
