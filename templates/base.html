@@ -15,11 +15,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.11/handlebars.min.js"></script>
 
         <script id="channel" type="text/x-handlebars-template">
-            <div class="channel">
+            <a class="nav-link" href="#">
                 {% raw -%}
                     {{contents}}
                 {%- endraw %}
-            </div>
+            </a>
         </script>
 
         <script src="{{ url_for('static', filename='index.js') }}"></script>
