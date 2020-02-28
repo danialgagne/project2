@@ -11,13 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
         socket.on('connect', () => {
             document.querySelector('#new-channel-name').onsubmit = () => {
                 new_channel_name = document.querySelector('#channel-name').value;
-                socket.emit('new_channel', {'name': new_channel_name})
+                socket.emit('new_channel', {'name': new_channel_name});
+                return false;
             };
         });
 
         // show new channels when added
         socket.on('update_channels', name => {
-            add_channel(name)
+            add_channel(name);
         })
     }
     else {
@@ -28,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
     };
 
-    // call back end
+    // request a list of channels
     function load_channels() {
         const request = new XMLHttpRequest();
         request.open('GET', '/channels');
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const channel_template = Handlebars.compile(document.querySelector('#channel').innerHTML);
 
+    // create the channels on the front end
     function add_channel(contents) {
         const channel = channel_template({'contents': contents});
         document.querySelector('#channels').innerHTML += channel;
