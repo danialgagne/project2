@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.querySelector('#new-channel-name').onsubmit = () => {
                 new_channel_name = document.querySelector('#channel-name').value;
                 socket.emit('new_channel', {'name': new_channel_name});
+                document.querySelector('#channel-name').value = '';
                 return false;
             };
         });
