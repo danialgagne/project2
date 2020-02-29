@@ -35,7 +35,7 @@
             </div>
         </form>
 
-        <div class="row">
+        <div class="row" id="flack-window">
             <div id="nav-channels" class="col-3 column">
                 <form id="new-channel-name">
                     <div class="form-inline">
@@ -48,7 +48,13 @@
                 </nav>
             </div>
 
-            <div class="col-9 column" id="messages">
+            <div class="col-9 column">
+                <div id="messages" class="overflow-auto">
+                </div>
+
+                <div class="row">
+                    <textarea class="form-control" id="message-text" placeholder="Say something"></textarea>
+                </div>
             </div>
         </div>
     </body>

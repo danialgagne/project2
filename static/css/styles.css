@@ -13,11 +13,15 @@ nav a {
     padding: 20px;
 }
 
-.row {
+#flack-window {
     min-height: 100vh;
     width: 100%;
 }
 
 #nav-channels {
     background-color: #563d7c;
+}
+
+#messages {
+    min-height: 80vh;
 }
