@@ -24,4 +24,5 @@ nav a {
 
 #messages {
     min-height: 80vh;
+    max-height: 80vh;
 }
