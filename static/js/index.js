@@ -4,6 +4,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('#new-display-name').remove();
         load_channels();
 
+        document.addEventListener('click', event => {
+            const element = event.target
+            if (element.className === 'nav-link') {
+                document.querySelectorAll(".message-block").forEach( block => {
+                    block.remove();
+                });
+                load_messages(element.id);
+            }
+        });
+
         // connect to websocket
         var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
@@ -20,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // show new channels when added
         socket.on('update_channels', name => {
             add_channel(name);
-        })
+        });
     }
     else {
         // allow user to set display name
@@ -29,23 +39,50 @@ document.addEventListener('DOMContentLoaded', () => {
             localStorage.setItem('display-name', display_name);
         };
     };
-
-    // request a list of channels
-    function load_channels() {
-        const request = new XMLHttpRequest();
-        request.open('GET', '/channels');
-        request.onload = () => {
-            const data =  JSON.parse(request.responseText);
-            data.forEach(add_channel);
-        };
-        request.send();
-    };
-
-    const channel_template = Handlebars.compile(document.querySelector('#channel').innerHTML);
-
-    // create the channels on the front end
-    function add_channel(contents) {
-        const channel = channel_template({'contents': contents});
-        document.querySelector('#channels').innerHTML += channel;
-    };
 });
+
+// request a list of channels
+function load_channels() {
+    const request = new XMLHttpRequest();
+    request.open('GET', '/channels');
+    request.onload = () => {
+        const data =  JSON.parse(request.responseText);
+        data.forEach(add_channel);
+    };
+    request.send();
+};
+
+const channel_template = Handlebars.compile(document.querySelector('#channel').innerHTML);
+
+// create the channels on the front end
+function add_channel(contents) {
+    const channel = channel_template({'contents': contents});
+    document.querySelector('#channels').innerHTML += channel;
+};
+
+// request a list of messages
+function load_messages(channel_name) {
+    const request = new XMLHttpRequest();
+    request.open('GET', `/channels/${channel_name}`);
+    request.onload = () => {
+        const data = JSON.parse(request.responseText);
+        let keys = Object.keys(data).sort();
+        keys.forEach(key => {
+            add_message(data[key]);
+        });
+    };
+    request.send();
+};
+
+const message_template = Handlebars.compile(document.querySelector('#message').innerHTML)
+
+// create messages on front end
+function add_message(contents) {
+    let local_time = new Date(contents['timestamp']);
+    const message = message_template({
+        'time': local_time,
+        'display_name': contents['display_name'],
+        'message': contents['message']
+    });
+    document.querySelector('#messages').innerHTML += message;
+};

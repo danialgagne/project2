@@ -33,8 +33,10 @@ def create_channel(data):
 
     if channel_name not in channels_list:
         channels_list.append(channel_name)
+        timestamp = str(datetime.now())
         channels_messages[channel_name] = {
-            str(datetime.now()): {
+            timestamp: {
+                'timestamp': timestamp,
                 'display_name': 'FlackBot',
                 'message': 'Start chatting in your new channel!'
             }

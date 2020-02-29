@@ -15,6 +15,15 @@
             </a>
         </script>
 
+        <script id="message" type="text/x-handlebars-template">
+            <div class="message-block">
+                {% raw -%}
+                    <b>{{ display_name }}</b> {{ time }}<br>
+                    {{ message }}
+                {%- endraw %}
+            </div>
+        </script>
+
         <script src="{{ url_for('static', filename='js/index.js') }}"></script>
         <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     </head>
@@ -39,8 +48,7 @@
                 </nav>
             </div>
 
-            <div class="col-9 column">
-                Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat.
+            <div class="col-9 column" id="messages">
             </div>
         </div>
     </body>
