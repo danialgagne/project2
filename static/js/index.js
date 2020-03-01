@@ -14,13 +14,22 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        document.querySelector('#message-input')
+                .addEventListener('keypress', function (e) {
+            if (e.which == 13 && !e.shiftKey) {
+                const message_text = this.value;
+                this.value = '';
+                e.preventDefault();
+            };
+        });
+
         // connect to websocket
         var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
         // when connected, configure new channel form
         socket.on('connect', () => {
             document.querySelector('#new-channel-name').onsubmit = () => {
-                new_channel_name = document.querySelector('#channel-name').value;
+                const new_channel_name = document.querySelector('#channel-name').value;
                 socket.emit('new_channel', {'name': new_channel_name});
                 document.querySelector('#channel-name').value = '';
                 return false;
@@ -35,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     else {
         // allow user to set display name
         document.querySelector('#new-display-name').onsubmit = () => {
-            display_name = document.querySelector('#display-name').value;
+            const display_name = document.querySelector('#display-name').value;
             localStorage.setItem('display-name', display_name);
         };
     };
@@ -78,7 +87,7 @@ const message_template = Handlebars.compile(document.querySelector('#message').i
 
 // create messages on front end
 function add_message(contents) {
-    let local_time = new Date(contents['timestamp']);
+    const local_time = new Date(contents['timestamp']);
     const message = message_template({
         'time': local_time,
         'display_name': contents['display_name'],
