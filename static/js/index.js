@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     // show display name if set
     if (localStorage.getItem('display-name')) {
+        let display_name = localStorage.getItem('display-name');
+
         document.querySelector('#new-display-name').remove();
         load_channels();
 
@@ -32,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (e.which == 13 && !e.shiftKey) {
                     const message_text = this.value;
                     socket.emit('new_message', {
-                        'display_name': localStorage.getItem('display_name'),
+                        'display_name': display_name,
                         'message': message_text,
                         'channel': localStorage.getItem('current_channel')
                     });
@@ -45,6 +47,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // show new channels when added
         socket.on('update_channels', name => {
             add_channel(name);
+        });
+
+        socket.on('update_messages', name => {
+            if (name == localStorage.getItem('current_channel')) {
+                document.querySelectorAll(".message-block").forEach( block => {
+                    block.remove();
+                });
+
+                load_messages(name)
+            }
         });
     }
     else {

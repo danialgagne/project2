@@ -43,6 +43,21 @@ def create_channel(data):
         }
         emit("update_channels", channel_name, broadcast=True)
 
+@socketio.on("new_message")
+def create_message(data):
+    channel = data['channel']
+    timestamp = str(datetime.now())
+    display_name = data['display_name']
+    message = data['message']
+    print(data)
+
+    channels_messages[channel][timestamp] = {
+        'timestamp': timestamp,
+        'display_name': display_name,
+        'message': message
+    }
+    emit('update_messages', channel, broadcast=True)
+
 
 if __name__ == '__main__':
     socketio.run(app)
