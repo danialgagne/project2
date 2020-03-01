@@ -13,15 +13,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 load_messages(element.id);
             }
         });
+        document.querySelector('#message-input').onke
 
-        document.querySelector('#message-input')
-                .addEventListener('keypress', function (e) {
+        document.querySelector('#message-input').onkeypress = function (e) {
             if (e.which == 13 && !e.shiftKey) {
                 const message_text = this.value;
+                console.log(message_text)
                 this.value = '';
                 e.preventDefault();
             };
-        });
+        };
 
         // connect to websocket
         var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
