@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 load_messages(element.id);
             }
         });
-        document.querySelector('#message-input').onke
 
         document.querySelector('#message-input').onkeypress = function (e) {
             if (e.which == 13 && !e.shiftKey) {
