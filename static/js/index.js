@@ -7,21 +7,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.addEventListener('click', event => {
             const element = event.target
             if (element.className === 'nav-link') {
+                let channel_name = element.id
                 document.querySelectorAll(".message-block").forEach( block => {
                     block.remove();
                 });
-                load_messages(element.id);
+                localStorage.setItem('current_channel', channel_name);
+                load_messages(channel_name);
             }
         });
-
-        document.querySelector('#message-input').onkeypress = function (e) {
-            if (e.which == 13 && !e.shiftKey) {
-                const message_text = this.value;
-                console.log(message_text)
-                this.value = '';
-                e.preventDefault();
-            };
-        };
 
         // connect to websocket
         var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
@@ -33,6 +26,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 socket.emit('new_channel', {'name': new_channel_name});
                 document.querySelector('#channel-name').value = '';
                 return false;
+            };
+
+            document.querySelector('#message-input').onkeypress = function (e) {
+                if (e.which == 13 && !e.shiftKey) {
+                    const message_text = this.value;
+                    socket.emit('new_message', {
+                        'display_name': localStorage.getItem('display_name'),
+                        'message': message_text,
+                        'channel': localStorage.getItem('current_channel')
+                    });
+                    this.value = '';
+                    e.preventDefault();
+                };
             };
         });
 
